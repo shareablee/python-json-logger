@@ -98,6 +98,8 @@ class JsonFormatter(logging.Formatter):
         log_record.update(extras)
         merge_record_extra(record, log_record, reserved=self._skip_fields)
 
-        return json.dumps(log_record,
+        dump = json.dumps(log_record,
                           default=self.json_default,
                           cls=self.json_encoder)
+
+        return 'loggly: %s' % dump
